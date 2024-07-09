@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "changeURL",
+  "version": "1.0.0",
+  "description": "An extension to change url after loading some specific pages",
+  "content_scripts": [
+    {
+      "matches": ["https://www.reddit.com/*"],
+      "js": ["Content.js"]
+    }
+  ]
+}
