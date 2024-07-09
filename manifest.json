@@ -5,7 +5,7 @@
   "description": "An extension to change url after loading some specific pages",
   "content_scripts": [
     {
-      "matches": ["https://www.reddit.com/*"],
+      "matches": ["https://*.reddit.com/*", "https://example.com/*"],
       "js": ["Content.js"]
     }
   ]
