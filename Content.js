@@ -16,15 +16,7 @@ window.onload = async () => {
     }
   } else {
     console.log("no www in url");
-    if (location.pathname.includes("/over18")) {
-      const buttons = document.querySelectorAll(".c-btn");
-      buttons.forEach((button) => {
-        if (button.attributes.value.value === "yes") {
-          const continueButton = button;
-          continueButton.click();
-        }
-      });
-    }
+    if (location.pathname.includes("/over18")) clickContinueButton();
   }
   console.log("finished execution");
 };
@@ -49,5 +41,12 @@ function decodeURL(url) {
   return string;
 }
 
-// location.reload();
-// console.log("after reloading");
+function clickContinueButton() {
+  const buttons = document.querySelectorAll(".c-btn");
+  buttons.forEach((button) => {
+    if (button.attributes.value.value === "yes") {
+      const continueButton = button;
+      continueButton.click();
+    }
+  });
+}
