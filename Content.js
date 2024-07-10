@@ -9,7 +9,7 @@ window.onload = async () => {
   console.log(location);
   console.log(search);
   if (host.includes("www")) {
-    if (!location.pathname.includes("media")) {
+    if (!pathname.includes("media") && !pathname.includes("gallery")) {
       modifiedURL = `${protocol}//${host.replace("www", "old")}${pathname}${search}`;
       console.log(modifiedURL);
       location.replace(modifiedURL);
