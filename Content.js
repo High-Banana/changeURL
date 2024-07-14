@@ -14,6 +14,20 @@ function changeRedditURL(params) {
             clickContinueButton();
     }
 }
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.changeURL) {
+        console.log("Ok URL will be changed", message);
+        const pathname = location.pathname;
+        const protocol = location.protocol;
+        const host = location.host;
+        const search = location.search;
+        changeRedditURL({ pathname, protocol, host, search });
+        sendResponse({ message: "URL changed" });
+    }
+    else {
+        console.log("URL change has been turned off");
+    }
+});
 window.onload = () => {
     const pathname = location.pathname;
     const protocol = location.protocol;
