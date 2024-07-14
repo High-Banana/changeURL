@@ -22,10 +22,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         const host = location.host;
         const search = location.search;
         changeRedditURL({ pathname, protocol, host, search });
-        sendResponse({ message: "URL changed" });
+        sendResponse({ URLchanged: true });
     }
     else {
         console.log("URL change has been turned off");
+        sendResponse({ URLchanged: false });
     }
 });
 window.onload = () => {

@@ -16,7 +16,7 @@ function checkOptionsStatus() {
 function sendMessageToWebPage(changeURL) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { changeURL: changeURL }, (response) => {
-            console.log("Response from webpage: ", response.message);
+            console.log("Changed URL: ", response.URLchanged);
         });
     });
 }
