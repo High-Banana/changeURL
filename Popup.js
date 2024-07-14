@@ -65,9 +65,9 @@ async function checkExtensionStatus(valueToGet) {
 }
 document.addEventListener("DOMContentLoaded", () => {
     input.forEach((element) => {
-        element.addEventListener("click", () => {
-            handleChromeStorage(element);
-            //   sendMessageToWebPage(changeURL);
+        element.addEventListener("click", async () => {
+            await handleChromeStorage(element);
+            sendMessageToWebPage(changeURL);
         });
     });
     setToggleStatus();

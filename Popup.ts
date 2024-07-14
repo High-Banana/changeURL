@@ -68,9 +68,9 @@ async function checkExtensionStatus(valueToGet: string): Promise<boolean> {
 
 document.addEventListener("DOMContentLoaded", () => {
   input.forEach((element) => {
-    element.addEventListener("click", () => {
-      handleChromeStorage(element);
-      //   sendMessageToWebPage(changeURL);
+    element.addEventListener("click", async () => {
+      await handleChromeStorage(element);
+      sendMessageToWebPage(changeURL);
     });
   });
 
