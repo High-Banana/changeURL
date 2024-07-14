@@ -3,6 +3,9 @@
   "name": "changeURL",
   "version": "1.0.0",
   "description": "An extension to change url after loading some specific pages",
+  "action": {
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
       "matches": ["https://*.reddit.com/*", "https://example.com/*"],
