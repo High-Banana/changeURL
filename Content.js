@@ -1,22 +1,18 @@
-const excludedRedditPathnames = ["media", "gallery"];
 const input = document.querySelectorAll(".toggleButton");
+let isChangeRedditURLTrue = false;
 input.forEach((element) => {
     element.addEventListener("click", () => {
         element.classList.toggle("checked");
+        if (element.id === "toggleReddit")
+            isChangeRedditURLTrue = !isChangeRedditURLTrue;
         console.log(element);
     });
 });
-window.onload = () => {
-    const pathname = location.pathname;
-    const protocol = location.protocol;
-    const host = location.host;
-    const search = location.search;
-    let modifiedURL;
-    console.log(location);
-    console.log(search);
+function changeRedditURL(params) {
+    const { host, pathname, protocol, search } = params;
     if (host.includes("www")) {
         if (!pathname.includes("media") && !pathname.includes("gallery")) {
-            modifiedURL = `${protocol}//${host.replace("www", "old")}${pathname}${search}`;
+            const modifiedURL = `${protocol}//${host.replace("www", "old")}${pathname}${search}`;
             console.log(modifiedURL);
             location.replace(modifiedURL);
         }
@@ -26,6 +22,16 @@ window.onload = () => {
         if (location.pathname.includes("/over18"))
             clickContinueButton();
     }
+}
+window.onload = () => {
+    const pathname = location.pathname;
+    const protocol = location.protocol;
+    const host = location.host;
+    const search = location.search;
+    console.log(location);
+    console.log(search);
+    if (isChangeRedditURLTrue)
+        changeRedditURL({ pathname, protocol, host, search });
     console.log("finished execution");
 };
 function decodeURL(url) {
