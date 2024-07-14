@@ -1,6 +1,6 @@
 const excludedRedditPathnames = ["media", "gallery"];
 
-window.onload = async () => {
+window.onload = () => {
   const pathname: string = location.pathname;
   const protocol: string = location.protocol;
   const host: string = location.host;
