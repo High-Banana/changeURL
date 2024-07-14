@@ -1,4 +1,11 @@
 const excludedRedditPathnames = ["media", "gallery"];
+const input = document.querySelectorAll(".toggleButton");
+input.forEach((element) => {
+    element.addEventListener("click", () => {
+        element.classList.toggle("checked");
+        console.log(element);
+    });
+});
 window.onload = () => {
     const pathname = location.pathname;
     const protocol = location.protocol;

@@ -30,3 +30,40 @@
   font-size: 13px;
   font-weight: 600;
 }
+
+.switch {
+  background-color: gray;
+  position: relative;
+  width: 40px;
+  display: block;
+  height: 20px;
+  border-radius: 15px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.switch::before {
+  content: "";
+  position: absolute;
+  background-color: white;
+  top: 50%;
+  bottom: 0px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: all 0.2s linear;
+  transform: translateY(-50%);
+}
+
+input[type="checkbox"].checked + .switch::before {
+  left: 22px;
+}
+
+input[type="checkbox"].checked + .switch {
+  background-color: rgb(35, 165, 90);
+}
+
+.toggleButton {
+  display: none;
+}
