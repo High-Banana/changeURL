@@ -50,7 +50,7 @@ window.onload = () => {
 };
 
 function decodeURL(url: string): string {
-  let string: string;
+  let string: string = "";
   if (url.includes("?dest=") || url.includes("media")) {
     string = url.slice(url.indexOf("=") + 1);
     console.log(string);
