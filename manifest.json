@@ -4,13 +4,13 @@
   "version": "1.0.0",
   "description": "An extension to change url after loading some specific pages",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "/src/popup/popup.html"
   },
   "permissions": ["storage", "activeTab"],
   "content_scripts": [
     {
       "matches": ["https://*.reddit.com/*", "https://example.com/*"],
-      "js": ["Content.js"]
+      "js": ["/dist/Content.js"]
     }
   ]
 }
