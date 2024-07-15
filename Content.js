@@ -36,8 +36,10 @@ window.onload = () => {
     const search = location.search;
     console.log(location);
     console.log(search);
-    if (isChangeRedditURLTrue)
-        changeRedditURL({ pathname, protocol, host, search });
+    chrome.storage.local.get(["changeRedditURL"], (result) => {
+        if (result.changeRedditURL)
+            changeRedditURL({ pathname, protocol, host, search });
+    });
     console.log("finished execution");
 };
 function decodeURL(url) {
