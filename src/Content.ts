@@ -5,13 +5,30 @@ type URLParameters = {
   search: string;
 };
 
+class URLDetails {
+  pathname: string;
+  protocol: string;
+  host: string;
+  search: string;
+
+  constructor(location: URLParameters) {
+    this.pathname = location.pathname;
+    this.protocol = location.protocol;
+    this.host = location.host;
+    this.search = location.search;
+  }
+
+  getCurrentURLValues(): object {
+    console.log({ pathname: this.pathname, protocol: this.protocol, host: this.host, search: this.search });
+    return { pathname: this.pathname, protocol: this.protocol, host: this.host, search: this.search };
+  }
+}
+
 window.onload = () => {
-  const pathname: string = location.pathname;
-  const protocol: string = location.protocol;
-  const host: string = location.host;
-  const search: string = location.search;
+  const urlDetails = new URLDetails(location);
+  const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
   console.log(location);
-  console.log(search);
+  console.log(pathname, protocol, host, search);
   chrome.storage.local.get(["changeRedditURL"], (result) => {
     if (result.changeRedditURL) changeRedditURL({ pathname, protocol, host, search });
   });
@@ -21,10 +38,8 @@ window.onload = () => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.changeURL) {
     console.log("Ok URL will be changed", message);
-    const pathname: string = location.pathname;
-    const protocol: string = location.protocol;
-    const host: string = location.host;
-    const search: string = location.search;
+    const urlDetails = new URLDetails(location);
+    const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
     changeRedditURL({ pathname, protocol, host, search });
     sendResponse({ URLchanged: true });
   } else {
