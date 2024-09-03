@@ -5,6 +5,10 @@ type URLParameters = {
   search: string;
 };
 
+type PopupMessage = {
+  changeURL?: boolean;
+};
+
 class URLDetails {
   pathname: string;
   protocol: string;
@@ -35,7 +39,7 @@ window.onload = () => {
   console.log("finished execution");
 };
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message: PopupMessage, sender, sendResponse) => {
   if (message.changeURL) {
     console.log("Ok URL will be changed", message);
     const urlDetails = new URLDetails(location);
