@@ -66,7 +66,8 @@ async function handleChromeStorage(element: Element) {
       redditURL = true;
       element.classList.add("checked");
     }
-  } else if (element.id === "toggleTwitter") {
+  }
+  if (element.id === "toggleTwitter") {
     const extensionStatus = await checkExtensionStatus("changeTwitterURL");
     console.log(extensionStatus);
     if (extensionStatus === true) {
