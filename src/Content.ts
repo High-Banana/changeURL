@@ -6,7 +6,13 @@ type URLParameters = {
 };
 
 type PopupMessage = {
-  changeURL?: boolean;
+  changeRedditURL?: boolean;
+  changeTwitterURL?: boolean;
+};
+
+type ChromeStorageResult = {
+  changeRedditURL?: boolean;
+  changeTwitterURL?: boolean;
 };
 
 class URLDetails {
@@ -33,21 +39,33 @@ window.onload = () => {
   const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
   console.log(location);
   console.log(pathname, protocol, host, search);
-  chrome.storage.local.get(["changeRedditURL"], (result) => {
+  chrome.storage.local.get(["changeRedditURL", "changeTwitterURL"], (result: ChromeStorageResult) => {
+    console.log(result);
     if (result.changeRedditURL) changeRedditURL({ pathname, protocol, host, search });
+    if (result.changeTwitterURL) changeTwitterURL({ pathname, protocol, host, search });
   });
   console.log("finished execution");
 };
 
 chrome.runtime.onMessage.addListener((message: PopupMessage, sender, sendResponse) => {
-  if (message.changeURL) {
-    console.log("Ok URL will be changed", message);
+  if (message.changeRedditURL) {
+    console.log("Reddit URL will be changed", message);
     const urlDetails = new URLDetails(location);
     const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
     changeRedditURL({ pathname, protocol, host, search });
     sendResponse({ URLchanged: true });
   } else {
-    console.log("URL change has been turned off");
+    console.log("Reddit URL change has been turned off");
+    sendResponse({ URLchanged: false });
+  }
+  if (message.changeTwitterURL) {
+    console.log("Twitter URL will be changed", message);
+    const urlDetails = new URLDetails(location);
+    const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
+    changeTwitterURL({ pathname, protocol, host, search });
+    sendResponse({ URLchanged: true });
+  } else {
+    console.log("Twitter URL change has been turned off");
     sendResponse({ URLchanged: false });
   }
 });
@@ -64,6 +82,13 @@ function changeRedditURL(params: URLParameters) {
     console.log("no www in url");
     if (location.pathname.includes("/over18")) clickContinueButton();
   }
+}
+
+function changeTwitterURL(params: URLParameters) {
+  const { host, pathname, protocol, search } = params;
+  const modifiedURL = `${protocol}//${host.replace("x", "xcancel")}${pathname}${search}`;
+  console.log(modifiedURL);
+  location.replace(modifiedURL);
 }
 
 function clickContinueButton() {

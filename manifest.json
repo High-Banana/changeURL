@@ -9,7 +9,7 @@
   "permissions": ["storage", "activeTab"],
   "content_scripts": [
     {
-      "matches": ["https://*.reddit.com/*", "https://example.com/*"],
+      "matches": ["https://*.reddit.com/*", "https://example.com/*", "https://x.com/*"],
       "js": ["/public/dist/Content.js"]
     }
   ]
