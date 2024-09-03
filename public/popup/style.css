@@ -24,6 +24,14 @@
 .option-section {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.singular-option {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
 }
 
 .option-name {
