@@ -25,6 +25,7 @@ chrome.storage.local.get(["changeRedditURL", "changeTwitterURL"], (result: Stora
 async function setToggleStatus() {
   const redditButton = document.getElementById("toggleReddit") as HTMLInputElement;
   const twitterButton = document.getElementById("toggleTwitter") as HTMLInputElement;
+  // for reddit
   if (await checkExtensionStatus("changeRedditURL")) {
     redditButton.classList.add("checked");
     console.log("change reddit on");
@@ -32,6 +33,7 @@ async function setToggleStatus() {
     redditButton.classList.remove("checked");
     console.log("change reddit off");
   }
+  // for twitter
   if (await checkExtensionStatus("changeTwitterURL")) {
     twitterButton.classList.add("checked");
     console.log("change twitter on");
