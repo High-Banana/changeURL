@@ -82,10 +82,17 @@ function changeRedditURL(params: URLParameters) {
 
 function changeTwitterURL(params: URLParameters) {
   const { host, pathname, protocol, search } = params;
+  let modifiedURL: string = "";
   if (host.includes("x.com")) {
-    const modifiedURL = `${protocol}//${host.replace("x", "xcancel")}${pathname}${search}`;
-    console.log(modifiedURL);
-    location.replace(modifiedURL);
+    if (pathname.includes("/i/flow/login")) {
+      let url: string = `${protocol}${host}${pathname}${search}`;
+      modifiedURL = decodeURL(url);
+      location.replace(modifiedURL);
+    } else {
+      modifiedURL = `${protocol}//${host.replace("x", "xcancel")}${pathname}${search}`;
+      console.log(modifiedURL);
+      location.replace(modifiedURL);
+    }
   }
 }
 
@@ -100,22 +107,22 @@ function clickContinueButton() {
   });
 }
 
-// function decodeURL(url: string): string {
-//   let string: string = "";
-//   if (url.includes("?dest=") || url.includes("media")) {
-//     string = url.slice(url.indexOf("=") + 1);
-//     console.log(string);
-//   }
+function decodeURL(url: string): string {
+  let string: string = "";
+  if (url.includes("?redirect_after_login=")) {
+    string = url.slice(url.indexOf("=") + 1);
+    console.log(string);
+  }
 
-//   while (string.includes("%3A") || string.includes("%2F")) {
-//     if (string.includes("%3A")) {
-//       string = string.replace("%3A", ":");
-//     }
+  while (string.includes("%3A") || string.includes("%2F")) {
+    if (string.includes("%3A")) {
+      string = string.replace("%3A", ":");
+    }
 
-//     if (string.includes("%2F")) {
-//       string = string.replace("%2F", "/");
-//     }
-//   }
-//   console.log(string);
-//   return string;
-// }
+    if (string.includes("%2F")) {
+      string = string.replace("%2F", "/");
+    }
+  }
+  console.log(string);
+  return string;
+}
