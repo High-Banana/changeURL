@@ -47,32 +47,28 @@ window.onload = () => {
   console.log("finished execution");
 };
 
-chrome.runtime.onMessage.addListener((message: PopupMessage, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message: PopupMessage, sender) => {
   if (message.changeRedditURL) {
     console.log("Reddit URL will be changed", message);
     const urlDetails = new URLDetails(location);
     const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
     changeRedditURL({ pathname, protocol, host, search });
-    sendResponse({ URLchanged: true });
   } else {
     console.log("Reddit URL change has been turned off");
-    sendResponse({ URLchanged: false });
   }
   if (message.changeTwitterURL) {
     console.log("Twitter URL will be changed", message);
     const urlDetails = new URLDetails(location);
     const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
     changeTwitterURL({ pathname, protocol, host, search });
-    sendResponse({ URLchanged: true });
   } else {
     console.log("Twitter URL change has been turned off");
-    sendResponse({ URLchanged: false });
   }
 });
 
 function changeRedditURL(params: URLParameters) {
   const { host, pathname, protocol, search } = params;
-  if (host.includes("www")) {
+  if (host.includes("www.reddit.com")) {
     if (!pathname.includes("media") && !pathname.includes("gallery")) {
       const modifiedURL = `${protocol}//${host.replace("www", "old")}${pathname}${search}`;
       console.log(modifiedURL);
@@ -86,9 +82,11 @@ function changeRedditURL(params: URLParameters) {
 
 function changeTwitterURL(params: URLParameters) {
   const { host, pathname, protocol, search } = params;
-  const modifiedURL = `${protocol}//${host.replace("x", "xcancel")}${pathname}${search}`;
-  console.log(modifiedURL);
-  location.replace(modifiedURL);
+  if (host.includes("x.com")) {
+    const modifiedURL = `${protocol}//${host.replace("x", "xcancel")}${pathname}${search}`;
+    console.log(modifiedURL);
+    location.replace(modifiedURL);
+  }
 }
 
 function clickContinueButton() {

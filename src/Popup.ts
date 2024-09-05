@@ -12,7 +12,6 @@ chrome.storage.local.get(["changeRedditURL", "changeTwitterURL"], (result: Stora
   console.log(result);
   const changeRedditURL: boolean = result.changeRedditURL ?? false;
   const changeTwitterURL: boolean = result.changeTwitterURL ?? false;
-  console.log(changeRedditURL);
 
   if (changeRedditURL) console.log("Change reddit url is enabled.");
   else console.log("Change reddit url is disabled.");
@@ -46,9 +45,7 @@ async function setToggleStatus() {
 function sendMessageToWebPage(redditURL: boolean, twitterURL: boolean) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs && tabs.length > 0) {
-      chrome.tabs.sendMessage(tabs[0].id as number, { changeRedditURL: redditURL, changeTwitterURL: twitterURL }, (response) => {
-        console.log("Changed URL: ", response.URLchanged);
-      });
+      chrome.tabs.sendMessage(tabs[0].id as number, { changeRedditURL: redditURL, changeTwitterURL: twitterURL });
     }
   });
 }
