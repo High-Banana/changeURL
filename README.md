@@ -5,7 +5,8 @@ This browser extension changes the URL of Reddit and X (Twitter) to bypass login
 - **Reddit**: `www.reddit.com` to `old.reddit.com`
 - **X (Twitter)**: `x.com` to `xcancel.com`
 
-> **Note:** Your browsing history is not saved by this extension. This extension simply changes URL to bypass login. No other additional features are added in this extension at this time.
+> [!Note]
+> Your browsing history is not saved by this extension. This extension simply changes URL to bypass login. No other additional features are added in this extension at this time.
 
 ## Acknowledgments
 
@@ -25,7 +26,8 @@ Big thanks to the developers of Nitter for allowing to bypass twitter's login.
 3. Enable developer mode and click on "Load unpacked" button.
 4. Select the extension's folder and confirm the installation.
 
-> Note that this extension may not work properly on Mozilla Firefox yet.
+> [!WARNING]
+> Note that this extension may not work properly on Mozilla Firefox.
 
 ## Usage
 
