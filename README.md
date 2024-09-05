@@ -21,10 +21,11 @@ Big thanks to the developers of Nitter for allowing to bypass twitter's login.
 
 ## Installation
 
-1. Download the extension file from here:
-2. Open your browser and go the extension page.
-3. Enable developer mode and click on "Load unpacked" button.
-4. Select the extension's folder and confirm the installation.
+1. Click [this](https://github.com/High-Banana/changeURL/releases/tag/v1.0.0) link and download the extension file (Change-URL.zip).
+2. Extract the zip file.
+3. Open your browser and go the extension page.
+4. Enable developer mode and click on "Load unpacked" button.
+5. Select the extension's folder (Change-URL) and confirm the installation.
 
 > [!WARNING]
 > Note that this extension may not work properly on Mozilla Firefox.
