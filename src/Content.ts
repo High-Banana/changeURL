@@ -28,7 +28,7 @@ class URLDetails {
     this.search = location.search;
   }
 
-  getCurrentURLValues(): object {
+  getCurrentURLValues(): URLParameters {
     console.log({ pathname: this.pathname, protocol: this.protocol, host: this.host, search: this.search });
     return { pathname: this.pathname, protocol: this.protocol, host: this.host, search: this.search };
   }
@@ -36,7 +36,7 @@ class URLDetails {
 
 window.onload = () => {
   const urlDetails = new URLDetails(location);
-  const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues() as URLParameters;
+  const { pathname, protocol, host, search } = urlDetails.getCurrentURLValues();
   console.log(location);
   console.log(pathname, protocol, host, search);
   chrome.storage.local.get(["changeRedditURL", "changeTwitterURL"], (result: ChromeStorageResult) => {
